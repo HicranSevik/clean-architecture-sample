@@ -44,19 +44,20 @@ class NoteFragment : Fragment() {
         checkButton = view.findViewById(R.id.checkButton)
         
         checkButton.setOnClickListener {
-            if(titleView.text.toString() != "" || contentView.text.toString() != "") {
-                val time: Long = System.currentTimeMillis()
-                currentNote.title = titleView.text.toString()
-                currentNote.content = contentView.text.toString()
-                currentNote.updateTime = time
-                if(currentNote.id == 0L) {
-                    currentNote.creationTime = time
+            currentNote.apply {
+                if(titleView.text.toString() != "" || contentView.text.toString() != "") {
+                    val time: Long = System.currentTimeMillis()
+                    title = titleView.text.toString()
+                    content = contentView.text.toString()
+                    updateTime = time
+                    if(id == 0L) {
+                        creationTime = time
+                    }
+                    viewModel.saveNote(this)
+                } else {
+                    findNavController().popBackStack()
                 }
-                viewModel.saveNote(currentNote)
-            } else {
-                findNavController().popBackStack()
             }
-
             observeViewModel()
         }
     }
