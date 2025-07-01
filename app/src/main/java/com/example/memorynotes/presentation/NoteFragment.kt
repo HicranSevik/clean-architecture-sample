@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.core.data.Note
@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NoteFragment : Fragment() {
 
-    private lateinit var viewModel: NoteViewModel
+    private val viewModel: NoteViewModel by viewModels()
     private lateinit var checkButton: FloatingActionButton
     private lateinit var titleView: EditText
     private lateinit var contentView: EditText
@@ -38,7 +38,6 @@ class NoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
 
         titleView = view.findViewById(R.id.titleView)
         contentView = view.findViewById(R.id.contentView)

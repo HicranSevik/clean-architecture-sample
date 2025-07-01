@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +18,7 @@ import android.util.Log
 
 class ListFragment : Fragment() {
 
-    private lateinit var viewModel: ListViewModel
+    private val viewModel: ListViewModel by viewModels()
     private lateinit var notesListView: RecyclerView
     private lateinit var addNote: FloatingActionButton
     private lateinit var loadingView: ProgressBar
@@ -51,7 +51,6 @@ class ListFragment : Fragment() {
         }
 
         addNote.setOnClickListener { goToNoteDetails() }
-        viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         observeViewModel()
     }
 
